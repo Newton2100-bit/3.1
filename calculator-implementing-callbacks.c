@@ -34,4 +34,4 @@ int main() {
     calc(n1, n2, sub);
 
     return 0;
-}:
+}
