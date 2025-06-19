@@ -1,4 +1,6 @@
 const std = @import("std");
+
 pub fn main() !void{
-    std.debug.print("Hello world in zig language\n",.{});
+    std.debug.print("Hello world in zig language.\nThe aouthor in branch irungu\n",.{});
+
 }
