@@ -1,0 +1,9 @@
+
+// How to run the system:
+// 1. Compile all files: javac *.java
+// 2. Start Load Balancer: java LoadBalancer 8080
+// 3. Start Servers: 
+//    java Server 1 8081 localhost 8080
+//    java Server 2 8082 localhost 8080
+//    java Server 3 8083 localhost 8080
+// 4. Run Client: java Client localhost 8080
