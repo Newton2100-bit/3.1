@@ -1,0 +1,12 @@
+the init method is the constructor in ths case 
+the init method is a daha method
+
+
+>>Coverung the concept of working with multiple files in pythonn
+
+
+dah dah methods
+  __init__
+  __add__
+  __multiply__
+  __
