@@ -6,5 +6,7 @@ name_server = {
 
 # Query
 server = name_server.get("server1", None)
-print(f"IP address of server1: {server}")
+print(f"--Server one--{'\n'}IP address of server1: {server}")
+print(f'--server two--{"\n"}Ip address of server2 :{name_server.get("server2")}')
+
 

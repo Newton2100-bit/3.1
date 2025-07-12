@@ -11,6 +11,11 @@ name_server = {
 }
 
 # Query
-server = name_server["region1"].get("server1", None)
-print(f"IP address of region1 server1: {server}")
+#server = name_server["region1"].get("server1", None)
+#print(f"IP address of region1 server1: {server}")
+print(f'Our availabe servers are{"\n"}')
+for key, value in name_server.items():
+    print(f'In region {key} we have ')
+    for name, address in value.items():
+        print(f'{"\t"}{name} => {address}')
 
