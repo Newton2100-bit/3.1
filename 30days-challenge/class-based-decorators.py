@@ -4,6 +4,7 @@ class CountCalls:
         self.count = 0
     
     def __call__(self, *args, **kwargs):
+        print('we are executing this from a class decorator')
         self.count += 1
         print(f"Call #{self.count} to {self.func.__name__}")
         value = self.func(*args, **kwargs)
