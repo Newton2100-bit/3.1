@@ -1,0 +1,28 @@
+/                           (root directory)
+├── bin/                   (essential binaries)
+├── boot/                  (boot files - minimal in container)
+├── dev/                   (device files)
+├── etc/                   (configuration files)
+├── home/                  (user home directories)
+├── lib/                   (shared libraries)
+├── lib64/                 (64-bit libraries)
+├── media/                 (mount point for removable media)
+├── mnt/                   (temporary mount points)
+├── opt/                   (optional software)
+├── proc/                  (process information)
+├── root/                  (root user home)
+├── run/                   (runtime data)
+├── sbin/                  (system binaries)
+├── srv/                   (service data)
+├── sys/                   (system information)
+├── tmp/                   (temporary files)
+├── usr/                   (user programs)
+│   ├── bin/
+│   │   └── python3        (installed Python)
+│   ├── lib/
+│   └── local/
+├── var/                   (variable data)
+│   └── lib/
+│       └── apt/           (package cache)
+└── app/                   (your WORKDIR)
+    └── print.py           (your copied file)

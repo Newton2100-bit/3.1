@@ -1,0 +1,7 @@
+# we are ignoring the ttx file that hold the explaniton of docker file hirerachy
+*.txt
+.dockerignore
+*.png
+*.md
+*.tree
+
