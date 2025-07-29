@@ -1,0 +1,303 @@
+"""
+HEAP PROBLEMS AND SOLUTIONS
+===========================
+
+Problem 1: Basic Heapify Implementation
+---------------------------------------
+Problem: Implement heapify operation for a max heap
+"""
+
+def heapify_max(arr, n, i):
+    """
+    Heapify a subtree rooted at index i
+    arr: array to heapify
+    n: size of heap
+    i: root index of subtree
+    """
+    largest = i  # Initialize largest as root
+    left = 2 * i + 1  # Left child
+    right = 2 * i + 2  # Right child
+    
+    # Check if left child exists and is greater than root
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+    
+    # Check if right child exists and is greater than largest so far
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+    
+    # If largest is not root, swap and continue heapifying
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify_max(arr, n, largest)
+
+
+"""
+Problem 2: Build Max Heap from Array (Bottom-up)
+------------------------------------------------
+Problem: Convert an arbitrary array into a max heap using Floyd's algorithm
+"""
+
+def build_max_heap(arr):
+    """
+    Build max heap from arbitrary array
+    Time: O(n), Space: O(1)
+    """
+    n = len(arr)
+    # Start from last non-leaf node and heapify each node
+    for i in range(n // 2 - 1, -1, -1):
+        heapify_max(arr, n, i)
+    return arr
+
+# Test case
+test_array = [4, 10, 3, 5, 1, 15, 9, 7, 6, 12]
+print("Original:", test_array)
+build_max_heap(test_array)
+print("Max Heap:", test_array)
+
+
+"""
+Problem 3: Heap Sort Implementation
+----------------------------------
+Problem: Sort an array using heap sort algorithm
+"""
+
+def heap_sort(arr):
+    """
+    Sort array using heap sort
+    Time: O(n log n), Space: O(1)
+    """
+    n = len(arr)
+    
+    # Build max heap
+    build_max_heap(arr)
+    
+    # Extract elements one by one
+    for i in range(n - 1, 0, -1):
+        # Move current root to end
+        arr[0], arr[i] = arr[i], arr[0]
+        # Call heapify on reduced heap
+        heapify_max(arr, i, 0)
+    
+    return arr
+
+# Test case
+test_sort = [12, 11, 13, 5, 6, 7]
+print("\nHeap Sort Test:")
+print("Original:", test_sort.copy())
+print("Sorted:", heap_sort(test_sort.copy()))
+
+
+"""
+Problem 4: Find Kth Largest Element
+-----------------------------------
+Problem: Find the kth largest element in an unsorted array using min heap
+"""
+
+import heapq
+
+def find_kth_largest_minheap(nums, k):
+    """
+    Find kth largest using min heap of size k
+    Time: O(n log k), Space: O(k)
+    """
+    heap = []
+    
+    for num in nums:
+        if len(heap) < k:
+            heapq.heappush(heap, num)
+        elif num > heap[0]:
+            heapq.heapreplace(heap, num)
+    
+    return heap[0]
+
+def find_kth_largest_maxheap(nums, k):
+    """
+    Find kth largest using max heap (heapify approach)
+    Time: O(n + k log n), Space: O(1)
+    """
+    # Convert to max heap by negating values
+    max_heap = [-x for x in nums]
+    heapq.heapify(max_heap)
+    
+    # Extract k-1 maximum elements
+    for _ in range(k - 1):
+        heapq.heappop(max_heap)
+    
+    return -heapq.heappop(max_heap)
+
+# Test cases
+nums = [3, 2, 1, 5, 6, 4]
+k = 2
+print(f"\nKth Largest Test (k={k}):")
+print("Array:", nums)
+print("Using min heap:", find_kth_largest_minheap(nums, k))
+print("Using max heap:", find_kth_largest_maxheap(nums, k))
+
+
+"""
+Problem 5: Merge K Sorted Arrays
+--------------------------------
+Problem: Merge k sorted arrays using min heap
+"""
+
+def merge_k_sorted_arrays(arrays):
+    """
+    Merge k sorted arrays using min heap
+    Time: O(n log k), Space: O(k) where n is total elements
+    """
+    heap = []
+    result = []
+    
+    # Push first element of each array to heap
+    for i, array in enumerate(arrays):
+        if array:  # Check if array is not empty
+            heapq.heappush(heap, (array[0], i, 0))
+    
+    while heap:
+        val, array_idx, element_idx = heapq.heappop(heap)
+        result.append(val)
+        
+        # Add next element from same array if exists
+        if element_idx + 1 < len(arrays[array_idx]):
+            next_val = arrays[array_idx][element_idx + 1]
+            heapq.heappush(heap, (next_val, array_idx, element_idx + 1))
+    
+    return result
+
+# Test case
+arrays = [
+    [1, 4, 5],
+    [1, 3, 4],
+    [2, 6]
+]
+print("\nMerge K Sorted Arrays:")
+print("Input:", arrays)
+print("Merged:", merge_k_sorted_arrays(arrays))
+
+
+"""
+Problem 6: Running Median using Two Heaps
+-----------------------------------------
+Problem: Find median of a stream of integers
+"""
+
+class MedianFinder:
+    """
+    Find median using two heaps:
+    - max_heap: stores smaller half (negated for max behavior)
+    - min_heap: stores larger half
+    """
+    
+    def __init__(self):
+        self.max_heap = []  # For smaller half (negated values)
+        self.min_heap = []  # For larger half
+    
+    def add_number(self, num):
+        """Add number and maintain balance"""
+        # Add to max_heap first (smaller half)
+        heapq.heappush(self.max_heap, -num)
+        
+        # Balance: move largest from max_heap to min_heap
+        heapq.heappush(self.min_heap, -heapq.heappop(self.max_heap))
+        
+        # If min_heap has more elements, balance back
+        if len(self.min_heap) > len(self.max_heap):
+            heapq.heappush(self.max_heap, -heapq.heappop(self.min_heap))
+    
+    def find_median(self):
+        """Return current median"""
+        if len(self.max_heap) > len(self.min_heap):
+            return -self.max_heap[0]
+        else:
+            return (-self.max_heap[0] + self.min_heap[0]) / 2.0
+
+# Test case
+print("\nRunning Median Test:")
+mf = MedianFinder()
+stream = [5, 15, 1, 3, 8, 7, 9, 2, 4]
+for num in stream:
+    mf.add_number(num)
+    print(f"Added {num}, Median: {mf.find_median()}")
+
+
+"""
+Problem 7: Check if Array is Max Heap
+------------------------------------
+Problem: Verify if given array represents a valid max heap
+"""
+
+def is_max_heap(arr):
+    """
+    Check if array represents a valid max heap
+    Time: O(n), Space: O(1)
+    """
+    n = len(arr)
+    
+    # Check all non-leaf nodes
+    for i in range(n // 2):
+        left = 2 * i + 1
+        right = 2 * i + 2
+        
+        # Check left child
+        if left < n and arr[i] < arr[left]:
+            return False
+        
+        # Check right child
+        if right < n and arr[i] < arr[right]:
+            return False
+    
+    return True
+
+# Test cases
+print("\nMax Heap Validation:")
+heap1 = [90, 15, 10, 7, 12, 2]
+heap2 = [9, 15, 10, 7, 12, 11]
+print(f"{heap1} is max heap: {is_max_heap(heap1)}")
+print(f"{heap2} is max heap: {is_max_heap(heap2)}")
+
+
+"""
+Problem 8: Convert Min Heap to Max Heap
+---------------------------------------
+Problem: Convert a min heap to max heap in-place
+"""
+
+def convert_min_to_max_heap(arr):
+    """
+    Convert min heap to max heap
+    Time: O(n), Space: O(1)
+    """
+    n = len(arr)
+    # Apply heapify from bottom to top for max heap
+    for i in range(n // 2 - 1, -1, -1):
+        heapify_max(arr, n, i)
+    return arr
+
+# Test case
+min_heap = [1, 3, 6, 5, 2, 4]
+print(f"\nConvert Min to Max Heap:")
+print(f"Min heap: {min_heap}")
+convert_min_to_max_heap(min_heap)
+print(f"Max heap: {min_heap}")
+
+
+"""
+COMPLEXITY ANALYSIS SUMMARY:
+============================
+
+1. Heapify: O(log n) time, O(1) space
+2. Build Heap: O(n) time, O(1) space
+3. Heap Sort: O(n log n) time, O(1) space
+4. Kth Largest: O(n log k) time, O(k) space
+5. Merge K Arrays: O(n log k) time, O(k) space
+6. Running Median: O(log n) per insertion, O(n) space
+7. Heap Validation: O(n) time, O(1) space
+8. Min to Max Conversion: O(n) time, O(1) space
+
+KEY INSIGHTS:
+- Bottom-up heapify is more efficient than top-down for building heaps
+- Two-heap technique is powerful for median problems
+- Min heap of size k is efficient for kth largest problems
+- Heap property validation only needs to check parent-child relationships
+"""
