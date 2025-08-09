@@ -1,0 +1,5 @@
+2025-07-18 11:05:42,987 - DEBUG - Debug: Variable x = 42
+2025-07-18 11:05:42,987 - INFO - Info: User authentication successful
+2025-07-18 11:05:42,987 - WARNING - Warning: Memory usage at 85%
+2025-07-18 11:05:42,988 - ERROR - Error: Database connection failed
+2025-07-18 11:05:42,988 - CRITICAL - Critical: System overheating detected

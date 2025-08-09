@@ -1,0 +1,3 @@
+2025-07-18 09:53:48,155 - multi_file_logger - CRITICAL - This is a critical message
+2025-07-18 09:54:42,106 - multi_file_logger - CRITICAL - This is a critical message
+2025-07-18 11:05:42,988 - CRITICAL - Critical: System overheating detected

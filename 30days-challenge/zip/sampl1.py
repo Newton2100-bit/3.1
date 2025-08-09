@@ -1,5 +1,5 @@
 # Basic zip with two lists
-names = ['Alice', 'Bob', 'Charlie']
+names = ["Alice", "Bob", "Charlie"]
 ages = [25, 30, 35]
 
 zipped = zip(names, ages)

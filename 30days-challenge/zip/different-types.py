@@ -1,6 +1,6 @@
 # Mixing different iterable types
 numbers = [1, 2, 3, 4]
-letters = 'abcd'
+letters = "abcd"
 boolean_values = (True, False, True, False)
 
 for num, letter, boolean in zip(numbers, letters, boolean_values):

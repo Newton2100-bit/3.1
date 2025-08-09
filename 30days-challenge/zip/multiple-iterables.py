@@ -1,6 +1,6 @@
-names = ['Alice', 'Bob', 'Charlie']
+names = ["Alice", "Bob", "Charlie"]
 ages = [25, 30, 35]
-cities = ['New York', 'London', 'Tokyo']
+cities = ["New York", "London", "Tokyo"]
 
 for name, age, city in zip(names, ages, cities):
     print(f"{name}, {age}, lives in {city}")
@@ -11,6 +11,6 @@ for name, age, city in zip(names, ages, cities):
 
 # Create list of tuples
 combined = list(zip(names, ages, cities))
-print('Raw zippped data','\n🤞\n',zip(names,ages,cities),'\n🤞')
+print("Raw zippped data", "\n🤞\n", zip(names, ages, cities), "\n🤞")
 print(combined)
 # [('Alice', 25, 'New York'), ('Bob', 30, 'London'), ('Charlie', 35, 'Tokyo')]
