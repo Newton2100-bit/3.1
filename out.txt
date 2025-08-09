@@ -1,0 +1,15 @@
+total 100
+drwxrwxr-x  4 newton newton  4096 Jul 14 12:30 .
+drwxrwxr-x 17 newton newton  4096 Jul  1 08:17 ..
+-rwxrwxr-x  1 newton newton 16216 Jul  1 14:44 GuessingGame
+-rw-rw-r--  1 newton newton  2542 Jul  1 14:45 GuessingGame.c
+-rw-rw-r--  1 newton newton  1168 Jun 24 23:29 comple.c
+-rwxrwxr-x  1 newton newton 16144 Jun 24 23:29 complex
+-rwxrwxr-x  1 newton newton 16392 Jul  1 08:24 hello
+-rw-rw-r--  1 newton newton  1628 Jul  1 08:24 hello.c
+drwxrwxr-x  2 newton newton  4096 Jun 29 19:17 input-output
+-rw-rw-r--  1 newton newton     0 Jul 14 12:30 out.txt
+-rwxrwxr-x  1 newton newton 16112 Jun 24 23:16 quadratic
+-rw-rw-r--  1 newton newton   784 Jun 24 23:16 quadratic-formula.c
+drwxrwxr-x  2 newton newton  4096 Jun 29 19:36 regex
+-rw-rw-r--  1 newton newton     0 Jul 14 12:28 time.c

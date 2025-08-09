@@ -1,0 +1,160 @@
+// C MULTITHREADING EXAMPLE
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+// Shared data
+int counter = 0;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+
+// Thread function 1 - Increment counter
+void* increment_thread(void* arg) {
+    int thread_id = *(int*)arg;
+    
+    for(int i = 0; i < 5; i++) {
+        // Lock before accessing shared data
+        pthread_mutex_lock(&mutex);
+        
+        int temp = counter;
+        printf("Thread %d: Reading counter = %d\n", thread_id, temp);
+        sleep(1); // Simulate work
+        counter = temp + 1;
+        printf("Thread %d: Incremented counter to %d\n", thread_id, counter);
+        
+        pthread_mutex_unlock(&mutex);
+        sleep(1);
+    }
+    
+    printf("Thread %d finished!\n", thread_id);
+    return NULL;
+}
+
+// Thread function 2 - Print counter
+void* print_thread(void* arg) {
+    int thread_id = *(int*)arg;
+    
+    for(int i = 0; i < 8; i++) {
+        pthread_mutex_lock(&mutex);
+        printf("Print Thread %d: Counter value = %d\n", thread_id, counter);
+        pthread_mutex_unlock(&mutex);
+        sleep(2);
+    }
+    
+    printf("Print Thread %d finished!\n", thread_id);
+    return NULL;
+}
+
+int main() {
+    pthread_t threads[3];
+    int thread_ids[3] = {1, 2, 3};
+    
+    printf("=== C MULTITHREADING DEMO ===\n");
+    printf("Main thread PID: %d\n", getpid());
+    
+    // Create threads
+    pthread_create(&threads[0], NULL, increment_thread, &thread_ids[0]);
+    pthread_create(&threads[1], NULL, increment_thread, &thread_ids[1]);
+    pthread_create(&threads[2], NULL, print_thread, &thread_ids[2]);
+    
+    // Wait for all threads to complete
+    for(int i = 0; i < 3; i++) {
+        pthread_join(threads[i], NULL);
+    }
+    
+    printf("All threads completed. Final counter: %d\n", counter);
+    pthread_mutex_destroy(&mutex);
+    
+    return 0;
+}
+
+/*
+JAVA MULTITHREADING EXAMPLE:
+
+public class MultithreadingDemo {
+    private static int counter = 0;
+    private static final Object lock = new Object();
+    
+    // Thread class 1 - Increment counter
+    static class IncrementThread extends Thread {
+        private int threadId;
+        
+        public IncrementThread(int id) {
+            this.threadId = id;
+        }
+        
+        @Override
+        public void run() {
+            for(int i = 0; i < 5; i++) {
+                synchronized(lock) {
+                    int temp = counter;
+                    System.out.println("Thread " + threadId + ": Reading counter = " + temp);
+                    try { Thread.sleep(1000); } catch(InterruptedException e) {}
+                    counter = temp + 1;
+                    System.out.println("Thread " + threadId + ": Incremented counter to " + counter);
+                }
+                try { Thread.sleep(1000); } catch(InterruptedException e) {}
+            }
+            System.out.println("Thread " + threadId + " finished!");
+        }
+    }
+    
+    // Thread class 2 - Print counter using Runnable
+    static class PrintTask implements Runnable {
+        private int threadId;
+        
+        public PrintTask(int id) {
+            this.threadId = id;
+        }
+        
+        @Override
+        public void run() {
+            for(int i = 0; i < 8; i++) {
+                synchronized(lock) {
+                    System.out.println("Print Thread " + threadId + ": Counter value = " + counter);
+                }
+                try { Thread.sleep(2000); } catch(InterruptedException e) {}
+            }
+            System.out.println("Print Thread " + threadId + " finished!");
+        }
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("=== JAVA MULTITHREADING DEMO ===");
+        System.out.println("Main thread: " + Thread.currentThread().getName());
+        
+        // Create threads
+        IncrementThread t1 = new IncrementThread(1);
+        IncrementThread t2 = new IncrementThread(2);
+        Thread t3 = new Thread(new PrintTask(3));
+        
+        // Start threads
+        t1.start();
+        t2.start();
+        t3.start();
+        
+        // Wait for threads to complete
+        try {
+            t1.join();
+            t2.join();
+            t3.join();
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        System.out.println("All threads completed. Final counter: " + counter);
+    }
+}
+
+CONCEPTS DEMONSTRATED:
+1. Thread Creation: pthread_create() vs Thread.start()
+2. Shared Data: Global variable accessed by multiple threads
+3. Synchronization: mutex (C) vs synchronized blocks (Java)
+4. Thread Joining: pthread_join() vs Thread.join()
+5. Race Conditions: Without proper locking, counter updates would be inconsistent
+6. Different thread types: Extending Thread vs implementing Runnable (Java)
+
+COMPILE & RUN:
+C: gcc -pthread multithreading.c -o multithreading && ./multithreading
+Java: javac MultithreadingDemo.java && java MultithreadingDemo
+*/
