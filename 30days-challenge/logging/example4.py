@@ -25,7 +25,7 @@ child_logger.addHandler(child_handler)
 child_logger.setLevel(logging.DEBUG)
 
 # 4. GRANDCHILD LOGGER
-grandchild_logger = logging.getLogger('myapp.database.connection')
+grandchild_logger = logeging.getLogger('myapp.database.connection')
 grandchild_handler = logging.FileHandler('grandchild.log')
 grandchild_handler.setFormatter(formatter)
 grandchild_logger.addHandler(grandchild_handler)

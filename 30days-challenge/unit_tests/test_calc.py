@@ -12,7 +12,7 @@ class test_calc(unittest.TestCase):
         self.assertEqual(calc.substract(10, 5), 5)
         self.assertEqual(calc.substract(10, 4), 6)
         self.assertEqual(calc.substract(-6, 4), -10)
-        self.assertEqual(calc.substract(-11, -13), 2)
+        self.assertEqual(calc.substract(-11, -13), 1)
 
     def test_multiply(self):
         self.assertEqual(calc.multiply(10, 20), 200)
