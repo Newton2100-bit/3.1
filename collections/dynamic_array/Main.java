@@ -6,10 +6,11 @@ public class Main{
 
     for(int i = 0; i < 25; ++i){
       dynamic_array.add(String.valueOf(i));
+      dynamic_array.add(i);
     }
 
     System.out.println("Our Size : " + dynamic_array.size() + " | Capacity :" + dynamic_array.capacity());
-    System.out.println(dynamic_array);
+    // System.out.println(dynamic_array);
 
 
     dynamic_array.insert(7,"77");

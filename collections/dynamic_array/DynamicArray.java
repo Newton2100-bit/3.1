@@ -1,7 +1,7 @@
 public class DynamicArray{
- private int capacity = 2;
- private int size = 0;
- private Object[] data;
+  private int capacity = 2;
+  private int size = 0;
+  private Object[] data;
 
   public DynamicArray(){
     data = new Object[capacity];

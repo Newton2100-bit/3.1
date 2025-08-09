@@ -1,0 +1,34 @@
+2025-07-21 15:35:21.750 | WARNING | Thread-3  | Product         | Product CHAIR001 (Office Chair) has LOW STOCK: 3 units remaining
+2025-07-21 15:35:21.752 | WARNING | Thread-3  | Product         | Product DESK001 (Standing Desk) has LOW STOCK: 1 units remaining
+2025-07-21 15:35:21.764 | WARNING | Thread-3  | Product         | Significant price change for product LAPTOP001: -23.1%
+2025-07-21 15:35:21.813 | WARNING | Thread-3  | InventoryManager | Found 2 products with low stock:
+2025-07-21 15:35:21.814 | WARNING | Thread-3  | InventoryManager | LOW STOCK ALERT: Standing Desk (DESK001) - Only 1 units remaining
+2025-07-21 15:35:21.815 | WARNING | Thread-3  | InventoryManager | LOW STOCK ALERT: Office Chair (CHAIR001) - Only 3 units remaining
+2025-07-21 15:35:22.886 | SEVERE  | Thread-3  | InventoryLoggingDemo | Critical error in main application: Cannot invoke "Product.getProductId()" because "<parameter1>" is null
+2025-07-21 15:35:22.890 | SEVERE  | Thread-3  | InventoryLoggingDemo | Main application exception:
+java.lang.NullPointerException: Cannot invoke "Product.getProductId()" because "<parameter1>" is null
+	at InventoryManager.addProduct(InventoryLoggingDemo.java:133)
+	at InventoryLoggingDemo.main(InventoryLoggingDemo.java:445)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at jdk.compiler/com.sun.tools.javac.launcher.SourceLauncher.execute(SourceLauncher.java:254)
+	at jdk.compiler/com.sun.tools.javac.launcher.SourceLauncher.run(SourceLauncher.java:138)
+	at jdk.compiler/com.sun.tools.javac.launcher.SourceLauncher.main(SourceLauncher.java:76)
+
+2025-07-21 16:00:47.125 | WARNING | Thread-3  | Product         | Product CHAIR001 (Office Chair) has LOW STOCK: 3 units remaining
+2025-07-21 16:00:47.128 | WARNING | Thread-3  | Product         | Product DESK001 (Standing Desk) has LOW STOCK: 1 units remaining
+2025-07-21 16:00:47.141 | WARNING | Thread-3  | Product         | Significant price change for product LAPTOP001: -23.1%
+2025-07-21 16:00:47.188 | WARNING | Thread-3  | InventoryManager | Found 2 products with low stock:
+2025-07-21 16:00:47.190 | WARNING | Thread-3  | InventoryManager | LOW STOCK ALERT: Standing Desk (DESK001) - Only 1 units remaining
+2025-07-21 16:00:47.193 | WARNING | Thread-3  | InventoryManager | LOW STOCK ALERT: Office Chair (CHAIR001) - Only 3 units remaining
+2025-07-21 16:00:48.291 | SEVERE  | Thread-3  | InventoryLoggingDemo | Critical error in main application: Cannot invoke "Product.getProductId()" because "<parameter1>" is null
+2025-07-21 16:00:48.298 | SEVERE  | Thread-3  | InventoryLoggingDemo | Main application exception:
+java.lang.NullPointerException: Cannot invoke "Product.getProductId()" because "<parameter1>" is null
+	at InventoryManager.addProduct(InventoryLoggingDemo.java:133)
+	at InventoryLoggingDemo.main(InventoryLoggingDemo.java:445)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at jdk.compiler/com.sun.tools.javac.launcher.SourceLauncher.execute(SourceLauncher.java:254)
+	at jdk.compiler/com.sun.tools.javac.launcher.SourceLauncher.run(SourceLauncher.java:138)
+	at jdk.compiler/com.sun.tools.javac.launcher.SourceLauncher.main(SourceLauncher.java:76)
+
